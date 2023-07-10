@@ -5,7 +5,6 @@ from ting_file_management.queue import Queue
 def process(path_file: str, instance: Queue):
     if instance.was_filed(path_file):
         return
-
     file = txt_importer(path_file)
     if file:
         formatted_file_obj = {
@@ -18,8 +17,11 @@ def process(path_file: str, instance: Queue):
         print(formatted_file_obj)
 
 
-def remove(instance):
-    """Aqui irá sua implementação"""
+def remove(instance: Queue):
+    if not len(instance):
+        return print("Não há elementos")
+    file = instance.dequeue()
+    print(f"Arquivo {file['nome_do_arquivo']} removido com sucesso")
 
 
 def file_metadata(instance, position):
